@@ -3,4 +3,5 @@ from django.http import request
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    context = {'printer_count': (range(6))}
+    return render(request, 'index.html', context)

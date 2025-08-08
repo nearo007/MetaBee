@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
+    <h1>METABEE</h1>
     <div class="div-main-container">
-        <h1>METABEE</h1>
+        {% for printer in printer_count %}
+            <div>
+                <img src="{% static 'img/icon_printer.png' %}" alt="printer-png">
+            </div>
+        {% endfor%}
     </div>
 </body>
 </html>
