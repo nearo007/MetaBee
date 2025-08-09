@@ -21,8 +21,17 @@
 <body>
     {% block header %}
         <header>
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'printers' %}">Impressoras</a>
+            <a href="{% url 'index' %}">
+                <img src="{% static 'img/header-home.png' %}" alt="Home">
+            </a>
+
+            <a href="{% url 'door-lock' %}">
+                <img src="{% static 'img/header-door.png' %}" alt="Door Lock">
+            </a>
+
+            <a href="{% url 'printers' %}">
+                <img src="{% static 'img/header-printer.png' %}" alt="Printer">
+            </a>
         </header>
     {% endblock %}
 

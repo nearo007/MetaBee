@@ -16,3 +16,6 @@ def printers(request):
     ]}
 
     return render(request, 'printers.html', context)
+
+def door_lock(request):
+    return render(request, "door-lock.html")

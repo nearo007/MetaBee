@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    margin-top: 80px;
+    margin-top: 120px;
 }
 
 header {
@@ -16,4 +16,13 @@ header {
     font-size: 20px;
 
     background-color: rgb(214, 214, 214);
+}
+
+header a {
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+header a img {
+    width: 40px;
 }
