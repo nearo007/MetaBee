@@ -22,16 +22,18 @@
     {% block header %}
         <header>
             <a href="{% url 'index' %}">
-                <img src="{% static 'img/header-home.png' %}" alt="Home">
+                <img class="img-metabee-logo" src="{% static 'img/logo-metabee.png' %}" alt="Metabee Logo">
             </a>
-
-            <a href="{% url 'door-lock' %}">
-                <img src="{% static 'img/header-door.png' %}" alt="Door Lock">
-            </a>
-
-            <a href="{% url 'printers' %}">
-                <img src="{% static 'img/header-printer.png' %}" alt="Printer">
-            </a>
+            
+            <div class="div-header-icons">
+                <a href="{% url 'door-lock' %}">
+                    <img src="{% static 'img/header-door.png' %}" alt="Door Lock">
+                </a>
+    
+                <a href="{% url 'printers' %}">
+                    <img src="{% static 'img/header-printer.png' %}" alt="Printer">
+                </a>
+            </div>
         </header>
     {% endblock %}
 

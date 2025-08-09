@@ -17,13 +17,16 @@
         {% for printer in printers %}
             <div class="div-printer">
                 <h2>{{ printer.name }}</h2>
-                <img class="img-printer-icon" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
 
                 {% if not printer.status %}
+                    <img class="img-printer-icon img-printer-off" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
+
                     <button class="button-printer-toggle">
                         <img src="{% static 'img/icon-toggle-off.png' %}" alt="toggle off">
                     </button>
                 {% elif printer.status %}
+                    <img class="img-printer-icon img-printer-on" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
+
                     <button class="button-printer-toggle">
                         <img src="{% static 'img/icon-toggle-on.png' %}" alt="toggle on">
                     </button>

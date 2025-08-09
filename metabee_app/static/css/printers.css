@@ -38,6 +38,14 @@ body {
     border: 3px solid black;
 }
 
+.img-printer-on {
+    background-color: rgb(216, 255, 220);
+}
+
+.img-printer-off {
+    background-color: rgb(255, 216, 216);
+}
+
 .button-printer-toggle {
     background-color: transparent;
     border: none;

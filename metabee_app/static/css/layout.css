@@ -3,19 +3,37 @@ html {
 }
 
 body {
-    margin-top: 120px;
+    margin-top: 150px;
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     position: fixed;
     right: 0;
     top: 0;
     left: 0;
-    padding: 20px 20px;
+    padding: 0 20px;
 
     font-size: 20px;
 
-    background-color: rgb(214, 214, 214);
+    background-color: rgb(230, 230, 230);
+    border-bottom: 3px solid rgb(180, 180, 180);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.img-metabee-logo {
+    width: 300px;
+}
+
+.div-header-icons {
+    width: 100px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header a {
