@@ -1,0 +1,19 @@
+html {
+    font-family: Arial;
+}
+
+body {
+    margin-top: 80px;
+}
+
+header {
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
+    padding: 20px 20px;
+
+    font-size: 20px;
+
+    background-color: rgb(214, 214, 214);
+}

@@ -3,6 +3,9 @@ from django.http import request
 
 # Create your views here.
 def index(request):
+    return render(request, 'index.html')
+
+def printers(request):
     context = {'printers': [
         {'status': True, 'name': 'Ender-3 V2'},
         {'status': False, 'name': 'Prusa i3 MK4'},
@@ -12,4 +15,4 @@ def index(request):
         {'status': False, 'name': 'Voxelab Aquila X2'},
     ]}
 
-    return render(request, 'index.html', context)
+    return render(request, 'printers.html', context)

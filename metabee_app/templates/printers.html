@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Printers
+{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/printers.css' %}">
+{% endblock %}
+
+{% block content%}
+    <h1>METABEE</h1>
+
+    <div class="div-main-container">
+        {% for printer in printers %}
+            <div class="div-printer">
+                <h2>{{ printer.name }}</h2>
+                <img class="img-printer-icon" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
+
+                {% if not printer.status %}
+                    <button class="button-printer-toggle">
+                        <img src="{% static 'img/icon-toggle-off.png' %}" alt="toggle off">
+                    </button>
+                {% elif printer.status %}
+                    <button class="button-printer-toggle">
+                        <img src="{% static 'img/icon-toggle-on.png' %}" alt="toggle on">
+                    </button>
+                {% endif %}
+            </div>
+        {% endfor%}
+    </div>
+{% endblock %}

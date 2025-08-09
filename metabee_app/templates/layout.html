@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>
+        {% block title %}
+            MetaBee
+        {% endblock %}    
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    
+    {% block extrahead %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block header %}
+        <header>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'printers' %}">Impressoras</a>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
