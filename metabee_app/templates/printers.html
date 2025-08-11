@@ -18,20 +18,29 @@
             <div class="div-printer">
                 <h2>{{ printer.name }}</h2>
 
+                <img class="img-printer-icon" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
+
                 {% if not printer.status %}
-                    <img class="img-printer-icon img-printer-off" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
-
-                    <button class="button-printer-toggle">
-                        <img src="{% static 'img/icon-toggle-off.png' %}" alt="toggle off">
-                    </button>
+                    <div class="div-printer-status div-printer-on">
+                        <img src="{% static 'img/icon-printer-available.png' %}" alt="">
+                        <p>Disponível</p>
+                    </div>
                 {% elif printer.status %}
-                    <img class="img-printer-icon img-printer-on" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
-
-                    <button class="button-printer-toggle">
-                        <img src="{% static 'img/icon-toggle-on.png' %}" alt="toggle on">
-                    </button>
+                    <div class="div-printer-status div-printer-off">
+                        <img src="{% static 'img/icon-printer-off.png' %}" alt="">
+                        <p>Desligada</p>
+                    </div>
                 {% endif %}
             </div>
         {% endfor%}
+        {% comment %} TODO REMOVER {% endcomment %}
+            <div class="div-printer">
+                <h2>{{ printer.name }}</h2>
+                <img class="img-printer-icon" src="{% static 'img/icon-printer.png' %}" alt="printer-png">
+                <div class="div-printer-status div-printer-operating">
+                    <img src="{% static 'img/icon-printer-operating.png' %}" alt="">
+                    <p>Operando</p>
+                </div>
+            </div>
     </div>
 {% endblock %}
