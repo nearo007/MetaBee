@@ -2,10 +2,6 @@ html {
     font-family: Arial;
 }
 
-body {
-    margin-top: 150px;
-}
-
 header {
     display: flex;
     justify-content: space-between;
