@@ -7,12 +7,12 @@ def index(request):
 
 def printers(request):
     context = {'printers': [
-        {'status': True, 'name': 'Ender-3 V2'},
-        {'status': False, 'name': 'Prusa i3 MK4'},
-        {'status': False, 'name': 'Anycubic Kobra Go'},
-        {'status': False, 'name': 'Elegoo Neptune 4'},
-        {'status': True, 'name': 'Bambu Lab P1P'},
-        {'status': False, 'name': 'Voxelab Aquila X2'},
+        {'status': 0, 'name': 'Ender-3 V2'},
+        {'status': 2, 'name': 'Prusa i3 MK4'},
+        {'status': 1, 'name': 'Anycubic Kobra Go'},
+        {'status': 2, 'name': 'Elegoo Neptune 4'},
+        {'status': 1, 'name': 'Bambu Lab P1P'},
+        {'status': 2, 'name': 'Voxelab Aquila X2'},
     ]}
 
     return render(request, 'printers.html', context)
