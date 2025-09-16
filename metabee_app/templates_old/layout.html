@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>
+        {% block title %}
+            MetaBee
+        {% endblock %}    
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    
+    {% block extrahead %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block header %}
+        <header>
+            <a href="{% url 'index' %}">
+                <img class="img-metabee-logo" src="{% static 'img/logo-metabee.png' %}" alt="Metabee Logo">
+            </a>
+            
+            <div class="div-header-icons">
+                <a href="{% url 'door-lock' %}">
+                    <img src="{% static 'img/header-door.png' %}" alt="Door Lock">
+                </a>
+    
+                <a href="{% url 'printers' %}">
+                    <img src="{% static 'img/header-printer.png' %}" alt="Printer">
+                </a>
+            </div>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

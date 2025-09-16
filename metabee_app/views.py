@@ -5,7 +5,7 @@ from django.http import request
 def index(request):
     return render(request, 'index.html')
 
-def printers(request):
+def dashboard(request):
     context = {'printers': [
         {'status': 0, 'name': 'Ender-3 V2'},
         {'status': 2, 'name': 'Prusa i3 MK4'},
@@ -15,7 +15,7 @@ def printers(request):
         {'status': 2, 'name': 'Voxelab Aquila X2'},
     ]}
 
-    return render(request, 'printers.html', context)
+    return render(request, 'dashboard.html', context)
 
-def door_lock(request):
-    return render(request, "door-lock.html")
+def manage_printers(request):
+    return render(request, "manage_printers.html")
