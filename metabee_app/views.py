@@ -26,7 +26,21 @@ def manage_printers(request):
     return render(request, "manage_printers.html", context)
 
 def add_printer(request):
-    return redirect("index")
+    if request.method == 'POST':
+        printer_name = request.POST.get('name')
+        printer_status = request.POST.get('status')
+        
+        print(printer_name, printer_status)
+        try:
+            new_printer = Printer.objects.create(name=printer_name, status=printer_status)
+            new_printer.save()
+            return redirect("manage_printers")
+
+        
+        except Exception as e:
+            print(e)
+
+    return render(request, "add_printer.html")
 
 def delete_printer(request, printer_id):
     try:
