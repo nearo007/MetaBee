@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import request
+from .models import Printer
 
 # Create your views here.
 def index(request):
@@ -18,4 +19,23 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 def manage_printers(request):
-    return render(request, "manage_printers.html")
+    printers = Printer.objects.all()
+
+    context = {'printers': printers}
+
+    return render(request, "manage_printers.html", context)
+
+def add_printer(request):
+    return redirect("index")
+
+def delete_printer(request, printer_id):
+    try:
+        printer = Printer.objects.filter(id=printer_id).first()
+
+        printer.delete()
+
+        return redirect("manage_printers")
+
+    except Exception as e:
+        print(e)
+        return redirect("manage_printers")

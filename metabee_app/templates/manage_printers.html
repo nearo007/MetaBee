@@ -1,14 +1,62 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% load static %}
 
 {% block title %}
-    Registro de Impressoras
+  Registro de Impressoras
 {% endblock %}
 
 {% block extrahead %}
 {% endblock %}
 
 {% block content %}
-    <h1>Resgistro de Impressoras</h1>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Registro de Impressoras</h2>
+    <button class="btn btn-outline-dark" onclick="location.reload()">
+      <i class="bi bi-arrow-clockwise"></i>
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if printers %}
+          {% for printer in printers %}
+          <tr>
+            <td>{{ printer.id }}</td>
+            <td>{{ printer.name }}</td>
+            <td>
+              {% if printer.status == 0 %}
+                <span class="badge bg-danger">Desligada</span>
+              {% elif printer.status == 1 %}
+                <span class="badge bg-success">Livre</span>
+              {% elif printer.status == 2 %}
+                <span class="badge bg-warning text-dark">Operando</span>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'delete_printer' printer.id %}" class="text-danger" title="Remover">
+                <i class="bi bi-trash-fill"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4" class="text-center">Nenhuma impressora cadastrada.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}
