@@ -49,6 +49,7 @@
           border-2">
             <div class="card-body">
               <h5 class="card-title">{{ printer.name }}</h5>
+              <h6 class="card-title">ID: {{ printer.device_id }}</h6>
               <p class="card-text">
                 {% if printer.status == 0 %}
                   <span class="badge bg-danger">Desligada</span>

@@ -1,9 +1,10 @@
 import tinytuya
+from .models import Printer
 
 DEVICE_IP = '192.168.0.111'
 LOCAL_KEY = 'B1iC3Q<mUgndi8k0'
 
-def obter_status_tomada(device_id: str, device_ip: str, local_key: str):
+def get_outlet_status(device_id: str, device_ip: str, local_key: str):
     """
     Retorna o status atual de uma tomada Tuya (corrente, potência, tensão).
 
@@ -40,5 +41,32 @@ def obter_status_tomada(device_id: str, device_ip: str, local_key: str):
     except Exception as e:
         return {'erro': f'Falha na conexão: {e}'}
 
+def get_printers_state_func():
+    printers = Printer.objects.all()
+    printers_state = {}
+
+    for printer in printers:
+        device_id = printer.device_id
+        printer_state = get_outlet_status(device_id, DEVICE_IP, LOCAL_KEY)
+        printers_state[device_id] = printer_state
+
+    return printers_state
+
+def update_printers_state_in_db(printers_state: dict):
+    for device_id, state in printers_state.items():
+        if state['corrente_A'] > 0:
+            Printer.objects.filter(device_id=device_id).update(status=1)
+        else:
+            Printer.objects.filter(device_id=device_id).update(state=0)
+
+
+# for device_id, state in printers_state.items():
+#     Printer.objects.filter(device_id=device_id).update(
+#         corrente_A=state['corrente_A'],
+#         potencia_W=state['potencia_W'],
+#         tensao_V=state['tensao_V']
+#     )
+
+
 if __name__ == '__main__':
-    obter_status_tomada()
+    print(get_outlet_status())

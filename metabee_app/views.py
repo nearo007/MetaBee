@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import request
 from .models import Printer
-from .utils import obter_status_tomada, DEVICE_IP, LOCAL_KEY
+from .utils import get_printers_state_func, update_printers_state_in_db, DEVICE_IP, LOCAL_KEY
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return redirect('dashboard')
 
 def dashboard(request):
     # context = {'printers': [
@@ -24,18 +24,25 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 def get_printers_state(request):
-    printers = Printer.objects.all()
-    printers_state = {}
+    # printers = Printer.objects.all()
+    # printers_state = {}
 
-    for printer in printers:
-        device_id = printer.device_id
-        printer_state = obter_status_tomada(device_id, DEVICE_IP, LOCAL_KEY)
-        #{'corrente_A': float, 'potencia_W': float, 'tensao_V': float}
-        printers_state[device_id] = printer_state
+    # for printer in printers:
+    #     device_id = printer.device_id
+    #     printer_state = obter_status_tomada(device_id, DEVICE_IP, LOCAL_KEY)
+    #     #{'corrente_A': float, 'potencia_W': float, 'tensao_V': float}
+    #     printers_state[device_id] = printer_state
+
+    printers_state = get_printers_state_func()
+
+    try:
+        print(printers_state)
+        update_printers_state_in_db(printers_state)
+
+    except Exception as e:
+        print(e)
         
-    context = {'printers_state': printers_state}
-    print(printers_state)
-    return render(request, "dashboard.html", context)
+    return redirect("dashboard")
 
 def manage_printers(request):
     printers = Printer.objects.all()
