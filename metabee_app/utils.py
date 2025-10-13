@@ -57,7 +57,7 @@ def update_printers_state_in_db(printers_state: dict):
         if state['corrente_A'] > 0:
             Printer.objects.filter(device_id=device_id).update(status=1)
         else:
-            Printer.objects.filter(device_id=device_id).update(state=0)
+            Printer.objects.filter(device_id=device_id).update(status=0)
 
 
 # for device_id, state in printers_state.items():
