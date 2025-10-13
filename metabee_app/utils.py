@@ -1,5 +1,8 @@
 import tinytuya
 
+DEVICE_IP = '192.168.0.111'
+LOCAL_KEY = 'B1iC3Q<mUgndi8k0'
+
 def obter_status_tomada(device_id: str, device_ip: str, local_key: str):
     """
     Retorna o status atual de uma tomada Tuya (corrente, potência, tensão).

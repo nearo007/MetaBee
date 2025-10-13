@@ -1,22 +1,41 @@
 from django.shortcuts import render, redirect
 from django.http import request
 from .models import Printer
+from .utils import obter_status_tomada, DEVICE_IP, LOCAL_KEY
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def dashboard(request):
-    context = {'printers': [
-        {'status': 0, 'name': 'Ender-3 V2'},
-        {'status': 2, 'name': 'Prusa i3 MK4'},
-        {'status': 1, 'name': 'Anycubic Kobra Go'},
-        {'status': 2, 'name': 'Elegoo Neptune 4'},
-        {'status': 1, 'name': 'Bambu Lab P1P'},
-        {'status': 2, 'name': 'Voxelab Aquila X2'},
-    ]}
+    # context = {'printers': [
+    #     {'status': 0, 'name': 'Ender-3 V2'},
+    #     {'status': 2, 'name': 'Prusa i3 MK4'},
+    #     {'status': 1, 'name': 'Anycubic Kobra Go'},
+    #     {'status': 2, 'name': 'Elegoo Neptune 4'},
+    #     {'status': 1, 'name': 'Bambu Lab P1P'},
+    #     {'status': 2, 'name': 'Voxelab Aquila X2'},
+    # ]}
+
+    printers = Printer.objects.all()
+
+    context = {'printers': printers}
 
     return render(request, 'dashboard.html', context)
+
+def get_printers_state(request):
+    printers = Printer.objects.all()
+    printers_state = {}
+
+    for printer in printers:
+        device_id = printer.device_id
+        printer_state = obter_status_tomada(device_id, DEVICE_IP, LOCAL_KEY)
+        #{'corrente_A': float, 'potencia_W': float, 'tensao_V': float}
+        printers_state[device_id] = printer_state
+        
+    context = {'printers_state': printers_state}
+    print(printers_state)
+    return render(request, "dashboard.html", context)
 
 def manage_printers(request):
     printers = Printer.objects.all()

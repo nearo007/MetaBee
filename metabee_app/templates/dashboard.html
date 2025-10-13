@@ -14,7 +14,10 @@
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="fw-bold">Dashboard de Impressoras</h2>
-      <button class="btn btn-outline-dark" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i></button>
+
+      <a href="{% url 'get_printers_state' %}">
+        <button class="btn btn-outline-dark"><i class="bi bi-arrow-clockwise"></i></button>
+      </a>
     </div>
 
     <div class="row g-4">
@@ -23,17 +26,23 @@
           <div class="card shadow-sm 
             {% if printer.status == 0 %}
               
+              
                border-danger 
+
 
 
             {% elif printer.status == 1 %}
               
+              
                border-success 
+
 
 
             {% elif printer.status == 2 %}
               
+              
                border-warning
+
 
 
             {% endif %}
