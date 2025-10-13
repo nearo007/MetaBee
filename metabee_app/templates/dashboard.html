@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block extrahead %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold">Dashboard de Impressoras</h2>
+
+      <a href="{% url 'get_printers_state' %}">
+        <button class="btn btn-outline-dark"><i class="bi bi-arrow-clockwise"></i></button>
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for printer in printers %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card shadow-sm 
+            {% if printer.status == 0 %}
+              
+              
+               border-danger 
+
+
+
+            {% elif printer.status == 1 %}
+              
+              
+               border-success 
+
+
+
+            {% elif printer.status == 2 %}
+              
+              
+               border-warning
+
+
+
+            {% endif %}
+          border-2">
+            <div class="card-body">
+              <h5 class="card-title">{{ printer.name }}</h5>
+              <h6 class="card-title">ID: {{ printer.device_id }}</h6>
+              <p class="card-text">
+                {% if printer.status == 0 %}
+                  <span class="badge bg-danger">Desligada</span>
+                {% elif printer.status == 1 %}
+                  <span class="badge bg-success">Livre</span>
+                {% elif printer.status == 2 %}
+                  <span class="badge bg-warning">Operando</span>
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

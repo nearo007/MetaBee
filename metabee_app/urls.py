@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('printers', views.printers, name="printers"),
-    path('door-lock', views.door_lock, name="door-lock"),
+    path('dashboard', views.dashboard, name="dashboard"),
+    path('manage_printers', views.manage_printers, name="manage_printers"),
+    path('add_printer', views.add_printer, name="add_printer"),
+    path('delete_printer/<int:printer_id>', views.delete_printer, name="delete_printer"),
+    path('get_printers_state', views.get_printers_state, name="get_printers_state")
 ]
