@@ -23,6 +23,7 @@
           <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Device Id</th>
             <th>Status</th>
             <th>Ações</th>
           </tr>
@@ -33,6 +34,7 @@
               <tr>
                 <td>{{ printer.id }}</td>
                 <td>{{ printer.name }}</td>
+                <td>{{ printer.device_id }}</td>
                 <td>
                   {% if printer.status == 0 %}
                     <span class="badge bg-danger">Desligada</span>

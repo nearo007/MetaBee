@@ -22,9 +22,14 @@ Adicionar Impressora
     </div>
 
     <div class="mb-3">
+      <label for="deviceId" class="form-label">Id da Impressora</label>
+      <input type="text" name="deviceId" id="deviceId" class="form-control" placeholder="Ex: D7890D77H"/>
+    </div>
+
+    <div class="mb-3">
       <label for="printerStatus" class="form-label">Status</label>
       <select name="status" id="printerStatus" class="form-select" required>
-        <option value="">Selecione...</option>
+        <option value="0">Selecione...</option>
         <option value="0">Desligada</option>
         <option value="1">Livre</option>
         <option value="2">Operando</option>

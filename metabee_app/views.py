@@ -29,10 +29,14 @@ def add_printer(request):
     if request.method == 'POST':
         printer_name = request.POST.get('name')
         printer_status = request.POST.get('status')
+        device_id = request.POST.get('deviceId')
         
-        print(printer_name, printer_status)
         try:
-            new_printer = Printer.objects.create(name=printer_name, status=printer_status)
+            if (device_id):
+                new_printer = Printer.objects.create(name=printer_name, status=printer_status, device_id=device_id)
+            else:
+                new_printer = Printer.objects.create(name=printer_name, status=printer_status)
+
             new_printer.save()
             return redirect("manage_printers")
 
