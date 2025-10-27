@@ -1,8 +1,8 @@
 import tinytuya
 from .models import Printer
 
-DEVICE_IP = '192.168.0.111'
-LOCAL_KEY = 'B1iC3Q<mUgndi8k0'
+DEVICE_IP = '192.168.226.79'
+LOCAL_KEY = '96tO3A>2urrqK$#$'
 
 def get_outlet_status(device_id: str, device_ip: str, local_key: str):
     """
@@ -54,8 +54,8 @@ def get_printers_state_func():
 
 def update_printers_state_in_db(printers_state: dict):
     for device_id, state in printers_state.items():
-        if state['corrente_A'] > 0:
-            Printer.objects.filter(device_id=device_id).update(status=1)
+        if state['corrente_A'] > 0.100:
+            Printer.objects.filter(device_id=device_id).update(status=2)
         else:
             Printer.objects.filter(device_id=device_id).update(status=0)
 
