@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import request
+from django.http import request, JsonResponse
 from .models import Printer
-from .utils import get_printers_state_func, update_printers_state_in_db, DEVICE_IP, LOCAL_KEY
+from .utils import get_printers_state_func, update_printers_state_in_db, DEVICE_IP, LOCAL_KEY, api_get_outlet_status
 
 # Create your views here.
 def index(request):
@@ -83,3 +83,15 @@ def delete_printer(request, printer_id):
     except Exception as e:
         print(e)
         return redirect("manage_printers")
+    
+def api_get_printer_status_id(request, device_id):
+    printer = Printer.objects.filter(device_id=device_id).first()
+    printer_state = api_get_outlet_status(device_id=device_id)
+    printer_state.update({'name': printer.name})
+    return JsonResponse(printer_state, safe=False)
+
+def api_get_printer_status_name(request, printer_name):
+    printer = Printer.objects.filter(name=printer_name).first()
+    printers_state = api_get_outlet_status(device_id=printer.device_id)
+    printers_state.update({'name': printer.name})
+    return JsonResponse(printers_state, safe=False)
