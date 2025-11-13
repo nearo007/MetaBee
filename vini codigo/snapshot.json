@@ -1,0 +1,44 @@
+{
+    "timestamp": 1760311397.9988594,
+    "devices": [
+        {
+            "id": "eb6ef7c3036ef24c8aw7ul",
+            "ip": "192.168.0.111",
+            "active": 2,
+            "encrypt": true,
+            "productKey": "keyjup78v54myhan",
+            "token": true,
+            "wf_cfg": true,
+            "name": "Tomada Inteligente 16A V2 Wifi",
+            "key": "B1iC3Q<mUgndi8k0",
+            "mac": "3c:0b:59:29:4f:37",
+            "ability": 0,
+            "dev_type": "default",
+            "err": "",
+            "type": "default",
+            "dps": {
+                "dps": {
+                    "1": true,
+                    "9": 0,
+                    "18": 0,
+                    "19": 0,
+                    "20": 1222,
+                    "21": 1,
+                    "22": 15913,
+                    "23": 26081,
+                    "24": 6472,
+                    "25": 5554,
+                    "26": 0,
+                    "38": "on",
+                    "40": "relay",
+                    "41": false,
+                    "42": "",
+                    "43": "",
+                    "44": ""
+                }
+            },
+            "origin": "broadcast",
+            "ver": "3.4"
+        }
+    ]
+}

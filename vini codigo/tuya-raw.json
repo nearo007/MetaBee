@@ -1,0 +1,381 @@
+{
+    "result": [
+        {
+            "active_time": 1760310961,
+            "biz_type": 0,
+            "category": "cz",
+            "create_time": 1760288461,
+            "icon": "smart/icon/ay1540090774726g5666/334187bf81f0f0fe4b529a867a56e7a8.jpg",
+            "id": "eb6ef7c3036ef24c8aw7ul",
+            "ip": "191.177.139.19",
+            "lat": "",
+            "local_key": "B1iC3Q<mUgndi8k0",
+            "lon": "",
+            "model": "T005",
+            "name": "Tomada Inteligente 16A V2 Wifi ",
+            "online": true,
+            "owner_id": "268007044",
+            "product_id": "fxaoxmkxsmvaxumt",
+            "product_name": "Tomada Inteligente 16A V2 Wifi ",
+            "status": [
+                {
+                    "code": "switch_1",
+                    "value": true
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "add_ele",
+                    "value": 2
+                },
+                {
+                    "code": "cur_current",
+                    "value": 0
+                },
+                {
+                    "code": "cur_power",
+                    "value": 0
+                },
+                {
+                    "code": "cur_voltage",
+                    "value": 1222
+                },
+                {
+                    "code": "test_bit",
+                    "value": 1
+                },
+                {
+                    "code": "voltage_coe",
+                    "value": 15913
+                },
+                {
+                    "code": "electric_coe",
+                    "value": 26081
+                },
+                {
+                    "code": "power_coe",
+                    "value": 6472
+                },
+                {
+                    "code": "electricity_coe",
+                    "value": 5554
+                },
+                {
+                    "code": "fault",
+                    "value": 0
+                },
+                {
+                    "code": "relay_status",
+                    "value": "on"
+                },
+                {
+                    "code": "light_mode",
+                    "value": "relay"
+                },
+                {
+                    "code": "child_lock",
+                    "value": false
+                },
+                {
+                    "code": "cycle_time",
+                    "value": ""
+                },
+                {
+                    "code": "random_time",
+                    "value": ""
+                },
+                {
+                    "code": "switch_inching",
+                    "value": ""
+                }
+            ],
+            "sub": false,
+            "time_zone": "-03:00",
+            "uid": "az1760298103496fHVm6",
+            "update_time": 1760310964,
+            "uuid": "bd64ae38db398c55",
+            "mapping": {
+                "1": {
+                    "code": "switch_1",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "9": {
+                    "code": "countdown_1",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "s",
+                        "min": 0,
+                        "max": 86400,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "17": {
+                    "code": "add_ele",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 50000,
+                        "scale": 3,
+                        "step": 100
+                    }
+                },
+                "18": {
+                    "code": "cur_current",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "mA",
+                        "min": 0,
+                        "max": 30000,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "19": {
+                    "code": "cur_power",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "W",
+                        "min": 0,
+                        "max": 80000,
+                        "scale": 1,
+                        "step": 1
+                    }
+                },
+                "20": {
+                    "code": "cur_voltage",
+                    "type": "Integer",
+                    "values": {
+                        "unit": "V",
+                        "min": 0,
+                        "max": 5000,
+                        "scale": 1,
+                        "step": 1
+                    }
+                },
+                "21": {
+                    "code": "test_bit",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 5,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "22": {
+                    "code": "voltage_coe",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 1000000,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "23": {
+                    "code": "electric_coe",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 1000000,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "24": {
+                    "code": "power_coe",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 1000000,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "25": {
+                    "code": "electricity_coe",
+                    "type": "Integer",
+                    "values": {
+                        "min": 0,
+                        "max": 1000000,
+                        "scale": 0,
+                        "step": 1
+                    }
+                },
+                "26": {
+                    "code": "fault",
+                    "type": "Bitmap",
+                    "values": {
+                        "label": [
+                            "ov_cr",
+                            "ov_vol",
+                            "ov_pwr",
+                            "ls_cr",
+                            "ls_vol",
+                            "ls_pow"
+                        ],
+                        "maxlen": 6
+                    }
+                },
+                "38": {
+                    "code": "relay_status",
+                    "type": "Enum",
+                    "values": {
+                        "range": [
+                            "off",
+                            "on",
+                            "memory"
+                        ]
+                    }
+                },
+                "40": {
+                    "code": "light_mode",
+                    "type": "Enum",
+                    "values": {
+                        "range": [
+                            "relay",
+                            "pos",
+                            "none",
+                            "on"
+                        ]
+                    }
+                },
+                "41": {
+                    "code": "child_lock",
+                    "type": "Boolean",
+                    "values": {}
+                },
+                "42": {
+                    "code": "cycle_time",
+                    "type": "String",
+                    "values": "{\"maxlen\":255}"
+                },
+                "43": {
+                    "code": "random_time",
+                    "type": "String",
+                    "values": "{\"maxlen\":255}"
+                },
+                "44": {
+                    "code": "switch_inching",
+                    "type": "String",
+                    "values": "{\"maxlen\":255}"
+                }
+            }
+        },
+        {
+            "active_time": 1760301107,
+            "biz_type": 0,
+            "category": "cz",
+            "create_time": 1760301024,
+            "icon": "smart/icon/bay1599677305883cNM4/03aaf2fd77d712895eb7b8408a374ebe.png",
+            "id": "vdevo176030102407481",
+            "ip": "191.177.139.19",
+            "lat": "",
+            "local_key": "_nv^R{9duEF*^7$7",
+            "lon": "",
+            "model": "TS-441",
+            "name": "Plugue Tramontina-vdevo",
+            "online": true,
+            "owner_id": "268007044",
+            "product_id": "mjzxchzvqmxps3lf",
+            "product_name": "Tramontina  Plug",
+            "status": [
+                {
+                    "code": "switch_1",
+                    "value": false
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 3180
+                },
+                {
+                    "code": "add_ele",
+                    "value": 100
+                },
+                {
+                    "code": "cur_current",
+                    "value": 9939
+                },
+                {
+                    "code": "cur_power",
+                    "value": 0
+                },
+                {
+                    "code": "cur_voltage",
+                    "value": 0
+                },
+                {
+                    "code": "test_bit",
+                    "value": 0
+                },
+                {
+                    "code": "voltage_coe",
+                    "value": 0
+                },
+                {
+                    "code": "electric_coe",
+                    "value": 0
+                },
+                {
+                    "code": "power_coe",
+                    "value": 0
+                },
+                {
+                    "code": "electricity_coe",
+                    "value": 0
+                },
+                {
+                    "code": "fault",
+                    "value": 0
+                },
+                {
+                    "code": "relay_status",
+                    "value": "off"
+                },
+                {
+                    "code": "overcharge_switch",
+                    "value": false
+                },
+                {
+                    "code": "light_mode",
+                    "value": "relay"
+                },
+                {
+                    "code": "child_lock",
+                    "value": false
+                },
+                {
+                    "code": "cycle_time",
+                    "value": ""
+                },
+                {
+                    "code": "random_time",
+                    "value": ""
+                },
+                {
+                    "code": "switch_inching",
+                    "value": ""
+                }
+            ],
+            "sub": false,
+            "time_zone": "",
+            "uid": "az1760298103496fHVm6",
+            "update_time": 1760301107,
+            "uuid": "vdevo176030102407481"
+        }
+    ],
+    "success": true,
+    "t": 1760311400541,
+    "tid": "70af8111a7c211f09d3fa6446417155a",
+    "file": {
+        "name": "tuya-raw.json",
+        "description": "Full raw list of Tuya devices.",
+        "account": "us4gc9v8uy4j3qjskssq",
+        "date": "2025-10-12T20:22:57.816556",
+        "tinytuya": "1.17.4"
+    }
+}
