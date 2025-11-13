@@ -1,0 +1,21 @@
+# Ignorar ambiente virtual (ajuste o nome se o seu for diferente)
+venv/
+env/
+.venv/
+
+# Ignorar arquivos compilados do Python
+__pycache__/
+*.pyc
+
+# Ignorar banco de dados local (se for SQLite)
+db.sqlite3
+
+# Ignorar configurações de IDE (VS Code)
+.vscode/
+.idea/
+# Ignorar configurações sensíveis do Tuya
+*.json
+devices.json
+tinytuya.json
+tuya-raw.json
+snapshot.json

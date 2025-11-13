@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+Adicionar Impressora
+{% endblock %}
+
+{% block extrahead %}
+
+{% endblock %}
+
+{% block content %}
+  <h1>Adicionar Impressora</h1>
+
+  <form action="{% url 'add_printer' %}" method="post" class="p-3 border rounded shadow-sm">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="printerName" class="form-label">Nome da Impressora</label>
+      <input type="text" name="name" id="printerName" class="form-control" placeholder="Ex: HP LaserJet 1020" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="deviceId" class="form-label">Id da Impressora</label>
+      <input type="text" name="deviceId" id="deviceId" class="form-control" placeholder="Ex: D7890D77H"/>
+    </div>
+
+    <div class="mb-3">
+      <label for="printerStatus" class="form-label">Status</label>
+      <select name="status" id="printerStatus" class="form-select" required>
+        <option value="0">Selecione...</option>
+        <option value="0">Desligada</option>
+        <option value="1">Livre</option>
+        <option value="2">Operando</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success px-4"><i class="bi bi-plus-lg me-2"></i> Registrar Impressora</button>
+  </form>
+{% endblock %}
