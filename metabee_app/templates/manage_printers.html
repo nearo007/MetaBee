@@ -24,6 +24,8 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Device Id</th>
+            <th>Faixa Ligado</th>
+            <th>Faixa Operando</th>
             <th>Status</th>
             <th>Ações</th>
           </tr>
@@ -35,6 +37,8 @@
                 <td>{{ printer.id }}</td>
                 <td>{{ printer.name }}</td>
                 <td>{{ printer.device_id }}</td>
+                <td>{{ printer.idle_range }}</td>
+                <td>{{ printer.operating_range }}</td>
                 <td>
                   {% if printer.status == 0 %}
                     <span class="badge bg-danger">Desligada</span>

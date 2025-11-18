@@ -6,3 +6,6 @@ class Printer(models.Model):
     name = models.CharField(max_length=100, default="Default Printer")
     status = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(2)], default=0)
     device_id = models.CharField(max_length=100, default="0")
+    
+    idle_range = models.FloatField(max_length=100, default=0)
+    operating_range = models.FloatField(max_length=100, default=0)
