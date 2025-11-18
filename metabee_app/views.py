@@ -70,6 +70,27 @@ def add_printer(request):
 
     return render(request, "add_printer.html")
 
+def edit_printer(request, printer_id):
+    printer = Printer.objects.filter(id=printer_id).first()
+    
+    if request.method == 'POST':
+        printer_name = request.POST.get('name')
+        device_id = request.POST.get('device_id')
+        idle_range = request.POST.get('idle_range')
+        operating_range = request.POST.get('operating_range')
+        
+        printer.name = printer_name
+        printer.device_id = device_id
+        printer.idle_range = idle_range
+        printer.operating_range = operating_range
+
+        printer.save()
+        
+        return redirect("manage_printers")
+    
+    context = {'printer': printer}
+    return render(request, "edit_printer.html", context)
+
 def delete_printer(request, printer_id):
     try:
         printer = Printer.objects.filter(id=printer_id).first()

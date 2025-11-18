@@ -27,7 +27,8 @@
             <th>Faixa Ligado</th>
             <th>Faixa Operando</th>
             <th>Status</th>
-            <th>Ações</th>
+            <th>Remover</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +51,10 @@
                 </td>
                 <td>
                   <a href="{% url 'delete_printer' printer.id %}" class="text-danger" title="Remover"><i class="bi bi-trash-fill"></i></a>
+                </td>
+
+                <td>
+                  <a href="{% url 'edit_printer' printer.id %}" class="text-danger" title="Editar"><i class="bi bi-pencil-fill"></i></a>
                 </td>
               </tr>
             {% endfor %}
