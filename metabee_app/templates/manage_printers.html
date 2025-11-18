@@ -26,7 +26,6 @@
             <th>Device Id</th>
             <th>Faixa Ligado</th>
             <th>Faixa Operando</th>
-            <th>Status</th>
             <th>Remover</th>
             <th>Editar</th>
           </tr>
@@ -40,15 +39,6 @@
                 <td>{{ printer.device_id }}</td>
                 <td>{{ printer.idle_range }}</td>
                 <td>{{ printer.operating_range }}</td>
-                <td>
-                  {% if printer.status == 0 %}
-                    <span class="badge bg-danger">Desligada</span>
-                  {% elif printer.status == 1 %}
-                    <span class="badge bg-success">Livre</span>
-                  {% elif printer.status == 2 %}
-                    <span class="badge bg-warning">Operando</span>
-                  {% endif %}
-                </td>
                 <td>
                   <a href="{% url 'delete_printer' printer.id %}" class="text-danger" title="Remover"><i class="bi bi-trash-fill"></i></a>
                 </td>
