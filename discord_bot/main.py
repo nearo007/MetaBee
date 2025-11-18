@@ -4,10 +4,14 @@ import logging
 from dotenv import load_dotenv
 import os
 import aiohttp
+from discord.errors import LoginFailure
 
 load_dotenv()
 
 token = os.getenv('DISCORD_TOKEN')
+
+if not token:
+    raise ValueError("DISCORD_TOKEN não encontrado no .env")
 
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 intents = discord.Intents.default()
@@ -69,10 +73,8 @@ async def impressora_status_id(context, device_id):
                 data = await response.json()  # se a API retornar JSON
                 # exemplo: pegar um campo específico
                 nome = data.get("name", "Campo não encontrado")
-                corrente = data.get("corrente_A", "Campo não encontrado")
-                potencia = data.get("potencia_W", "Campo não encontrado")
-                tensao = data.get("tensao_V", "Campo não encontrado")
-                await context.send(f"{context.author.mention}\nNome: {nome}\nCorrente: {corrente}\nPotência: {potencia}\nTensão: {tensao}")
+                state = data.get("state", "Campo não encontrado")
+                await context.send(f"{context.author.mention}\nNome: {nome}\nEstado: {state}")
             else:
                 await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
 
@@ -86,12 +88,14 @@ async def impressora_status_name(context, printer_name):
                 data = await response.json()  # se a API retornar JSON
                 # exemplo: pegar um campo específico
                 nome = data.get("name", "Campo não encontrado")
-                corrente = data.get("corrente_A", "Campo não encontrado")
-                potencia = data.get("potencia_W", "Campo não encontrado")
-                tensao = data.get("tensao_V", "Campo não encontrado")
-                await context.send(f"{context.author.mention}\nNome: {nome}\nCorrente: {corrente}\nPotência: {potencia}\nTensão: {tensao}")
+                state = data.get("state", "Campo não encontrado")
+                await context.send(f"{context.author.mention}\nNome: {nome}\nEstado: {state}")
             else:
                 await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
 
 if __name__ == '__main__':
-    bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+    try:
+        bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+    
+    except LoginFailure:
+        print('Erro: Credenciais Incorretas, verifique o token.')
