@@ -93,6 +93,25 @@ async def impressora_status_name(context, printer_name):
             else:
                 await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
 
+@bot.command()
+async def todas_impressoras(context):
+    url = f"http://127.0.0.1:8000/api/all_printer_status"
+    
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                data = await response.json()  # se a API retornar JSON
+                printers = data.get("printer_id")
+
+                full_string = f"{context.author.mention}"
+                
+                for printer in printers:
+                    full_string += f"\nNome: {printer.name}\nEstado: {printer.state}"
+
+                await context.send(full_string)
+            else:
+                await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")     
+
 if __name__ == '__main__':
     try:
         bot.run(token, log_handler=handler, log_level=logging.DEBUG)

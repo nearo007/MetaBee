@@ -9,6 +9,7 @@ urlpatterns = [
     path('edit_printer/<int:printer_id>', views.edit_printer, name="edit_printer"),
     path('delete_printer/<int:printer_id>', views.delete_printer, name="delete_printer"),
     path('get_printers_state', views.get_printers_state, name="get_printers_state"),
+    path('api_all_printer_status', views.api_all_printer_status, name="api_all_printer_status"),
     path('api/get_printer_status_id/<str:device_id>', views.api_get_printer_status_id, name="api_get_printer_status_id"),
     path('api/get_printer_status_name/<str:printer_name>', views.api_get_printer_status_name, name="api_get_printer_status_name")
 ]

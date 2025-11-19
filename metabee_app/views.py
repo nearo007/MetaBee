@@ -114,3 +114,17 @@ def api_get_printer_status_name(request, printer_name):
     printer_info = api_get_outlet_status(printer.device_id)
     printer_state = api_state_from_range({printer.device_id: printer_info})
     return JsonResponse(printer_state, safe=False)
+
+def api_all_printer_status(request):
+    printers = Printer.objects.all()
+
+    printers_state = []
+    for printer in printers:
+        printer_info = {
+            'id': printer.id,
+            'name': printer.name,
+            'state': printer.state,
+        }
+
+        printers_state.append(printer_info)
+    return JsonResponse(printers_state, safe=False)
