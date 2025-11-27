@@ -123,8 +123,9 @@ def api_all_printer_status(request):
         printer_info = {
             'id': printer.id,
             'name': printer.name,
-            'state': printer.state,
+            'state': printer.status,
         }
 
         printers_state.append(printer_info)
-    return JsonResponse(printers_state, safe=False)
+        
+    return JsonResponse({'printer_id': printers_state})

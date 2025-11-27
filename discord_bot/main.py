@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv
 import os
 import aiohttp
+import urllib.parse  # ADICIONADO: Para tratar espaços na URL
 from discord.errors import LoginFailure
 
 load_dotenv()
@@ -18,15 +19,20 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents, help_command=None)
 
+# ============================
+# BOT ONLINE
+# ============================
 @bot.event
 async def on_ready():
-    GUILD_ID = 1235268950418260179
-    guild = discord.Object(id=GUILD_ID)
+    # Nota: O sync global pode demorar para aparecer, em produção prefira syncar por Guild se for urgente
     await bot.tree.sync()
     print(f"{bot.user.name} is online!")
 
+# ============================
+# EVENTO DE MENSAGEM
+# ============================
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -35,83 +41,121 @@ async def on_message(message):
     if "metabee" in message.content.lower():
         await message.channel.send(f"{message.author.mention} fala cupinxa")
 
-    await bot.process_commands(message) # continuar a verificar os eventos padrões
+    await bot.process_commands(message)
 
-@bot.command()
-async def ajuda(context):
-    comandos = ["!help", "!impressora_status_id + ID_DA_IMPRESSORA", "impressora_status_name + NOME_DA_IMPRESSORA"]
-    
-    response_string = ""
-    
-    for i in range(0, len(comandos)):
-        response_string += f"\n\n{i+1} - {comandos[i]}"
+# ============================
+# HELP
+# ============================
+@bot.command(name="help", help="Mostra todos os comandos disponíveis.")
+async def help_command(context):
+    help_lines = []
+
+    for command in bot.commands:
+        if command.hidden:
+            continue
         
-    await context.send(f"Precisa de ajuda? {context.author.mention}!{response_string}")
+        name = f"!{command.name}"
+        desc = command.help or "Sem descrição."
+        help_lines.append(f"**{name}** — {desc}")
 
-@bot.command()
-async def soma(context, n1: float, n2: float):
-    soma = n1 + n2
-    await context.send(f"{context.author.mention} {n1:g} + {n2:g} = {soma:g}")
+    final_msg = f"Comandos disponíveis {context.author.mention}:\n\n"
+    final_msg += "\n".join(help_lines)
 
-@bot.tree.command(name="help", description="list commands")
-async def hello(interaction: discord.Interaction):
-    comandos = ["!help", "!impressora_status_id + ID_DA_IMPRESSORA", "impressora_status_name + NOME_DA_IMPRESSORA"]
-    
-    response_string = ""
-    
-    for i in range(0, len(comandos)):
-        response_string += f"\n\n{i+1} - {comandos[i]}"
-    await interaction.response.send_message(f"Precisa de ajuda? {interaction.user.mention}!{response_string}")
+    await context.send(final_msg)
 
-@bot.command()
+# ============================
+# STATUS POR ID
+# ============================
+@bot.command(help="Mostra o status de uma impressora pelo ID.")
 async def impressora_status_id(context, device_id):
-    url = f"http://127.0.0.1:8000/api/get_printer_status_id/{device_id}"
+    # IDs geralmente não tem espaço, mas se tiverem, trate com urllib também
+    safe_id = urllib.parse.quote(str(device_id))
+    url = f"http://127.0.0.1:8000/api/get_printer_status_id/{safe_id}"
     
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             if response.status == 200:
-                data = await response.json()  # se a API retornar JSON
-                # exemplo: pegar um campo específico
+                data = await response.json()
                 nome = data.get("name", "Campo não encontrado")
                 state = data.get("state", "Campo não encontrado")
                 await context.send(f"{context.author.mention}\nNome: {nome}\nEstado: {state}")
             else:
                 await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
 
-@bot.command()
-async def impressora_status_name(context, printer_name):
-    url = f"http://127.0.0.1:8000/api/get_printer_status_name/{printer_name}"
+
+# ============================
+# STATUS POR NOME (ATUALIZADO)
+# ============================
+@bot.command(help="Mostra o status de uma impressora pelo nome (Aceita espaços).")
+async def impressora_status_name(context, *, printer_name): # O asterisco permite espaços
+    
+    # Transforma "HP Laserjet" em "HP%20Laserjet" para a URL não quebrar
+    safe_name = urllib.parse.quote(printer_name)
+    
+    url = f"http://127.0.0.1:8000/api/get_printer_status_name/{safe_name}"
     
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            if response.status == 200:
-                data = await response.json()  # se a API retornar JSON
-                # exemplo: pegar um campo específico
-                nome = data.get("name", "Campo não encontrado")
-                state = data.get("state", "Campo não encontrado")
-                await context.send(f"{context.author.mention}\nNome: {nome}\nEstado: {state}")
-            else:
-                await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
+        # Bloco try/except adicionado para capturar erros de conexão (ex: API desligada)
+        try:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    nome = data.get("name", "Campo não encontrado")
+                    state = data.get("state", "Campo não encontrado")
+                    await context.send(f"{context.author.mention}\nNome: {nome}\nEstado: {state}")
+                elif response.status == 404:
+                     await context.send(f"{context.author.mention} Impressora '{printer_name}' não encontrada.")
+                else:
+                    await context.send(f"{context.author.mention} Erro na API: {response.status}")
+        except Exception as e:
+            await context.send(f"{context.author.mention} Erro de conexão: {str(e)}")
 
-@bot.command()
+
+# ============================
+# TODAS IMPRESSORAS
+# ============================
+@bot.command(help="Lista o status de todas as impressoras.")
 async def todas_impressoras(context):
     url = f"http://127.0.0.1:8000/api/all_printer_status"
     
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            if response.status == 200:
-                data = await response.json()  # se a API retornar JSON
-                printers = data.get("printer_id")
+        try:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    printers = data.get("printer_id", []) # Adicionado valor padrão [] se a chave não existir
 
-                full_string = f"{context.author.mention}"
+                    if not printers:
+                         await context.send(f"{context.author.mention} Nenhuma impressora encontrada.")
+                         return
+
+                    full_string = f"{context.author.mention}\n"
+                    
+                    state = printer.get('state', 'N/A')
+                    if state == 0:
+                        state = 'Desligado'
+                    elif state == 1:
+                        state = 'Ligado'
+                    elif state == 2:
+                        state = 'Operando'
                 
-                for printer in printers:
-                    full_string += f"\nNome: {printer.name}\nEstado: {printer.state}"
+                    for printer in printers:
+                        full_string += f"**Nome:** {printer.get('name', 'N/A')} | **Estado:** {state}\n"
 
-                await context.send(full_string)
-            else:
-                await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")     
+                    # O Discord tem limite de 2000 caracteres por mensagem. 
+                    # Se tiver muitas impressoras, pode cortar.
+                    if len(full_string) > 2000:
+                        full_string = full_string[:1900] + "\n... (lista muito longa)"
 
+                    await context.send(full_string)
+                else:
+                    await context.send(f"{context.author.mention} Erro ao acessar a API: {response.status}")
+        except Exception as e:
+            await context.send(f"{context.author.mention} Erro de conexão: {str(e)}")
+
+# ============================
+# RUN
+# ============================
 if __name__ == '__main__':
     try:
         bot.run(token, log_handler=handler, log_level=logging.DEBUG)
